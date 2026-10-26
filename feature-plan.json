@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "current_feature": "api-skeleton",
+  "features": [
+    {
+      "id": "api-skeleton",
+      "title": "FastAPI skeleton with health check and memory CRUD",
+      "status": "done",
+      "acceptance": [
+        "GET /health returns 200 OK",
+        "POST /v1/banks/{bank_id}/documents creates a document",
+        "GET /v1/banks/{bank_id}/documents/{doc_id} retrieves a document",
+        "POST /v1/banks/{bank_id}/recall returns memories for a query"
+      ],
+      "implementation": [
+        "app/main.py"
+      ],
+      "tests": [
+        "tests/test_main.py"
+      ]
+    },
+    {
+      "id": "hermes-recall-timestamp",
+      "title": "Hermes recall timestamp prefix injection",
+      "status": "planned",
+      "acceptance": [
+        "recall_timestamp_prefix setting toggles date prefix on recalled memories",
+        "Auto-recall block shows [YYYY-MM-DD] prefix when enabled",
+        "hindsight_recall tool shows [YYYY-MM-DD] prefix when enabled",
+        "mentioned_at preferred, occurred_start fallback"
+      ],
+      "implementation": [],
+      "tests": []
+    },
+    {
+      "id": "reranker-cohere-compat",
+      "title": "Cohere-compatible reranker response parsing",
+      "status": "planned",
+      "acceptance": [
+        "Handles 'score' alias for 'relevance_score'",
+        "Handles {scores, indices} array response shape",
+        "Skips out-of-range indices instead of crashing",
+        "Tests cover all three failure modes"
+      ],
+      "implementation": [],
+      "tests": []
+    },
+    {
+      "id": "livekit-integration",
+      "title": "LiveKit Agents integration package",
+      "status": "planned",
+      "acceptance": [
+        "HindsightMemory class for session memory",
+        "HindsightAgent subclass with automatic recall",
+        "create_hindsight_tools() for function tools",
+        "Unit tests with mocked client"
+      ],
+      "implementation": [],
+      "tests": []
+    }
+  ]
+}
