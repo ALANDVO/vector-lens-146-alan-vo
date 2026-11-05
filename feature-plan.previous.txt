@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "current_feature": "hermes-integration",
+  "features": [
+    {
+      "id": "core-api-skeleton",
+      "title": "Core FastAPI skeleton with health check and one end-to-end workflow",
+      "status": "done",
+      "acceptance": [
+        "FastAPI app starts and serves /healthz",
+        "POST /v1/banks/{bank_id}/documents creates a document",
+        "POST /v1/banks/{bank_id}/documents/{doc_id}/retain stores content",
+        "GET /v1/banks/{bank_id}/documents/{doc_id}/recall returns stored content",
+        "Runnable with `python -m uvicorn main:app`"
+      ],
+      "implementation": [
+        "main.py",
+        "pyproject.toml"
+      ],
+      "tests": [
+        "tests/test_api.py"
+      ]
+    },
+    {
+      "id": "persistence-layer",
+      "title": "SQLite persistence for documents and memories",
+      "status": "done",
+      "acceptance": [
+        "Documents persist across restarts",
+        "Memories extracted and stored with timestamps",
+        "Recall queries return relevant memories"
+      ],
+      "implementation": [
+        "main.py"
+      ],
+      "tests": [
+        "tests/test_api.py"
+      ]
+    },
+    {
+      "id": "extraction-pipeline",
+      "title": "LLM-based memory extraction from retained content",
+      "status": "done",
+      "acceptance": [
+        "Retain triggers extraction",
+        "Extracted memories have mentioned_at, occurred_start",
+        "Memories queryable via recall"
+      ],
+      "implementation": [
+        "main.py"
+      ],
+      "tests": [
+        "tests/test_api.py::TestExtractionPipeline"
+      ]
+    },
+    {
+      "id": "hermes-integration",
+      "title": "Hermes provider with timestamp injection (issue #4697)",
+      "status": "done",
+      "acceptance": [
+        "recall_timestamp_prefix setting",
+        "Timestamps rendered in auto-recall and tool output",
+        "mentioned_at preferred, occurred_start fallback"
+      ],
+      "implementation": [
+        "main.py"
+      ],
+      "tests": [
+        "tests/test_api.py::TestHermesIntegration"
+      ]
+    },
+    {
+      "id": "reranker-fix",
+      "title": "Cohere-compatible reranker robustness (issue #5814)",
+      "status": "planned",
+      "acceptance": [
+        "Handles 'score' alias for relevance_score",
+        "Parses {scores, indices} array shape",
+        "Skips out-of-range indices gracefully"
+      ],
+      "implementation": [],
+      "tests": []
+    }
+  ]
+}
+  "current_feature": "extraction-pipeline",
+  "features": [
+    {
+      "id": "core-api-skeleton",
+      "title": "Core FastAPI skeleton with health check and one end-to-end workflow",
+      "status": "done",
+      "acceptance": [
+        "FastAPI app starts and serves /healthz",
+        "POST /v1/banks/{bank_id}/documents creates a document",
+        "POST /v1/banks/{bank_id}/documents/{doc_id}/retain stores content",
+        "GET /v1/banks/{bank_id}/documents/{doc_id}/recall returns stored content",
+        "Runnable with `python -m uvicorn main:app`"
+      ],
+      "implementation": [
+        "main.py",
+        "pyproject.toml"
+      ],
+      "tests": [
+        "tests/test_api.py"
+      ]
+    },
+    {
+      "id": "persistence-layer",
+      "title": "SQLite persistence for documents and memories",
+      "status": "done",
+      "acceptance": [
+        "Documents persist across restarts",
+        "Memories extracted and stored with timestamps",
+        "Recall queries return relevant memories"
+      ],
+      "implementation": [
+        "main.py"
+      ],
+      "tests": [
+        "tests/test_api.py"
+      ]
+    },
+    {
+      "id": "extraction-pipeline",
+      "title": "LLM-based memory extraction from retained content",
+      "status": "done",
+      "acceptance": [
+        "Retain triggers extraction",
+        "Extracted memories have mentioned_at, occurred_start",
+        "Memories queryable via recall"
+      ],
+      "implementation": [
+        "main.py"
+      ],
+      "tests": [
+        "tests/test_api.py::TestExtractionPipeline"
+      ]
+    },
+    {
+      "id": "hermes-integration",
+      "title": "Hermes provider with timestamp injection (issue #4697)",
+      "status": "planned",
+      "acceptance": [
+        "recall_timestamp_prefix setting",
+        "Timestamps rendered in auto-recall and tool output",
+        "mentioned_at preferred, occurred_start fallback"
+      ],
+      "implementation": [],
+      "tests": []
+    },
+    {
+      "id": "reranker-fix",
+      "title": "Cohere-compatible reranker robustness (issue #5814)",
+      "status": "planned",
+      "acceptance": [
+        "Handles 'score' alias for relevance_score",
+        "Parses {scores, indices} array shape",
+        "Skips out-of-range indices gracefully"
+      ],
+      "implementation": [],
+      "tests": []
+    }
+  ]
+}

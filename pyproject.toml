@@ -1,13 +1,12 @@
 [project]
 name = "vector-lens-146-alan-vo"
 version = "0.1.0"
-description = "Hindsight: Agent Memory That Learns"
+description = "Hindsight: Agent Memory That Learns - Core API"
 readme = "README.md"
-license = {text = "MIT"}
 requires-python = ">=3.11"
 dependencies = [
     "fastapi>=0.110.0",
-    "uvicorn>=0.29.0",
+    "uvicorn[standard]>=0.29.0",
     "pydantic>=2.7.0",
     "pydantic-settings>=2.3.0",
 ]
@@ -20,7 +19,7 @@ dev = [
 ]
 
 [build-system]
-requires = ["setuptools>=68.0"]
+requires = ["setuptools>=69.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.pytest.ini_options]
