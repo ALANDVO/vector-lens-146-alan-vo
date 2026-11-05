@@ -1,34 +1,27 @@
 # Changelog
 
-## 1.1.0 — work-in-progress checkpoint
+## 1.2.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
+## 1.0.0 — work-in-progress checkpoint
+
+### Added
+- **extraction-pipeline**: LLM-based memory extraction from retained content
+  - Retain endpoint triggers extraction of structured memories
+  - Memories include `mentioned_at` (retention time) and `occurred_start` (extracted from content)
+  - Date extraction supports ISO timestamps (2025-05-01T10:00:00Z), YYYY-MM-DD, and month-name formats
+  - Falls back to `mentioned_at` when no explicit date found in content
+  - Multiple sentences in content create separate memories
+  - 4 new extraction tests added
+
+### Fixed
+- Document model fields now have proper defaults for test compatibility
+
+## 1.0.0 — work-in-progress checkpoint
 
 Partial code published for continued development. Known issues: STATUS.md.
 
 ## 1.0.0 — work-in-progress checkpoint
 
 Partial code published for continued development. Known issues: STATUS.md.
-
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
-## [0.1.0] - 2026-10-26
-
-### Added
-- FastAPI skeleton with health check endpoint (`GET /health`)
-- Document CRUD endpoints:
-  - `POST /v1/banks/{bank_id}/documents` - Create document
-  - `GET /v1/banks/{bank_id}/documents/{doc_id}` - Retrieve document
-- Memory recall endpoint:
-  - `POST /v1/banks/{bank_id}/recall` - Query memories
-- In-memory storage for banks, documents, and memories
-- Test suite with 5 passing tests covering all endpoints
-- Project configuration with pyproject.toml
-- README with API documentation and quick start guide
-
-### Infrastructure
-- Python 3.11+ requirement
-- Dependencies: fastapi, uvicorn, pydantic, pydantic-settings
-- Dev dependencies: pytest, pytest-asyncio, httpx
-- Git repository initialized

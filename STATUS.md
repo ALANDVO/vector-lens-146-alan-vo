@@ -2,11 +2,11 @@
 
 Work in progress; not a release-readiness or successful QA claim.
 
-Version: 1.1.0
+Version: 1.2.0
 
 ## Outstanding findings
 
-No new checkpoint changes after bounded retry; defer this target after repeated failures
+Repair the existing feature plan format while preserving its roadmap: Extra data: line 86 column 3 (char 2436)
 
 ## Next round
 

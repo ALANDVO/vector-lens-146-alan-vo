@@ -1,6 +1,5 @@
+main.py
 pyproject.toml
-app/main.py
-tests/test_main.py
 vector_lens_146_alan_vo.egg-info/PKG-INFO
 vector_lens_146_alan_vo.egg-info/SOURCES.txt
 vector_lens_146_alan_vo.egg-info/dependency_links.txt
