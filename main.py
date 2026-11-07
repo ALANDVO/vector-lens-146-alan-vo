@@ -226,6 +226,10 @@ class CohereCompatibleRerankClient:
         results.sort(key=lambda x: x["relevance_score"], reverse=True)
         return results[:min(len(results), num_documents)]
 
+class HermesConfig(BaseModel):
+    """Configuration for Hermes memory formatting."""
+    recall_timestamp_prefix: bool = Field(default=False, description="Prefix memories with timestamp")
+
 
 def format_memory_for_hermes(memory: Memory, config: HermesConfig) -> str:
     """
