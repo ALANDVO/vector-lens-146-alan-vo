@@ -19,3 +19,6 @@ Implementation: `main.py:229-231`
 
 Tests: `tests/test_api.py:275-393`
 
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)
