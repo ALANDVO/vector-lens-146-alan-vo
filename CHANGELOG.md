@@ -32,4 +32,4 @@ Partial code published for continued development. Known issues: STATUS.md.
 
 ---
 
-Alan Vo · [alanvo.net](https://alanvo.net)
+Alan Vo · [alanvo.net](https://alanvo.net) · [X: @alanvoasi](https://x.com/alanvoasi)
