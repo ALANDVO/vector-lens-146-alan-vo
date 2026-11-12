@@ -171,13 +171,15 @@ class CohereCompatibleRerankClient:
         return self._parse_response(result, len(documents))
     
     def _parse_response(self, result: dict, num_documents: int) -> list[dict]:
-        """
-        Parse rerank response handling multiple formats.
-        
+        """Parse rerank response handling multiple formats.
         Returns list of dicts with index, relevance_score, document
         """
+        # Validate input structure
+        if not isinstance(result, dict):
+            return []
+
         all_scores = [0.0] * num_documents
-        
+
         # Format 1 & 2: results array with index and relevance_score/score
         if "results" in result and isinstance(result["results"], list):
             for item in result["results"]:
@@ -199,7 +201,7 @@ class CohereCompatibleRerankClient:
                     all_scores[original_idx] = float(score)
                 except (TypeError, ValueError):
                     continue
-        
+
         # Format 3: scores and indices arrays
         elif "scores" in result and "indices" in result:
             scores = result.get("scores", [])
@@ -212,7 +214,7 @@ class CohereCompatibleRerankClient:
                         all_scores[idx] = float(score)
                     except (TypeError, ValueError):
                         continue
-        
+
         # Build results with original document text
         results = []
         for idx, score in enumerate(all_scores):
@@ -221,7 +223,7 @@ class CohereCompatibleRerankClient:
                 "relevance_score": score,
                 "document": documents[idx] if idx < len(documents) else ""
             })
-        
+
         # Sort by score descending and take top_n
         results.sort(key=lambda x: x["relevance_score"], reverse=True)
         return results[:min(len(results), num_documents)]
