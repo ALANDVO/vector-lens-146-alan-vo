@@ -168,9 +168,9 @@ class CohereCompatibleRerankClient:
             response.raise_for_status()
             result = response.json()
         
-        return self._parse_response(result, len(documents))
+        return self._parse_response(result, len(documents), documents)
     
-    def _parse_response(self, result: dict, num_documents: int) -> list[dict]:
+    def _parse_response(self, result: dict, num_documents: int, documents: list = None) -> list[dict]:
         """Parse rerank response handling multiple formats.
         Returns list of dicts with index, relevance_score, document
         """
@@ -221,7 +221,7 @@ class CohereCompatibleRerankClient:
             results.append({
                 "index": idx,
                 "relevance_score": score,
-                "document": documents[idx] if idx < len(documents) else ""
+                "document": documents[idx] if documents and idx < len(documents) else ""
             })
 
         # Sort by score descending and take top_n
