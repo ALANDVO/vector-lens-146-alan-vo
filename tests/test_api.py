@@ -553,3 +553,27 @@ class TestReranker:
         # All scores should be 0.0
         for r in result:
             assert r["relevance_score"] == 0.0
+    
+    async def test_rerank_score_alias_out_of_range(self, client: AsyncClient):
+        """Test rerank with 'score' alias handles out-of-range indices gracefully."""
+        from main import CohereCompatibleRerankClient
+        
+        client_rerank = CohereCompatibleRerankClient()
+        result = client_rerank._parse_response(
+            {"results": [
+                {"index": 0, "score": 0.9},
+                {"index": 5, "score": 0.8},  # Out of range (num_documents=3)
+                {"index": -1, "score": 0.7},  # Negative
+                {"index": 1, "score": 0.6}
+            ]},
+            num_documents=3
+        )
+        
+        # Only valid indices (0, 1, 2) should be processed; 5 and -1 are skipped
+        assert len(result) == 3
+        # Score 0.9 for index 0, 0.6 for index 1; index 2 gets default 0.0
+        scores_by_idx = {r["index"]: r["relevance_score"] for r in result}
+        assert scores_by_idx[0] == 0.9
+        assert scores_by_idx[1] == 0.6
+        # Index 2 should have default score 0.0 (not in the response)
+        assert scores_by_idx[2] == 0.0
