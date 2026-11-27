@@ -189,6 +189,12 @@ class CohereCompatibleRerankClient:
                 if original_idx is None:
                     continue
                 # Handle out-of-range indices gracefully
+                # Also handle string indices by attempting conversion
+                if isinstance(original_idx, str):
+                    try:
+                        original_idx = int(original_idx)
+                    except ValueError:
+                        continue
                 if not isinstance(original_idx, int) or original_idx < 0 or original_idx >= num_documents:
                     continue
                 # Try relevance_score first, then score alias
